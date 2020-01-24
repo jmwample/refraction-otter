@@ -61,7 +61,7 @@ dfn {
   font-style: italic;
 }
 h1 {
-  font-size: 2em;
+  font-size: 3.3em;
   margin: 0.67em 0;
 }
 mark {
@@ -230,8 +230,9 @@ h1 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Titillium Web", Helvetica, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
@@ -619,4 +620,17 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+
+.headerimg {
+  background-image: url(https://refraction.network/img/refraction_pattern.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+  display: inline-block;
+  position: absolute;
+  z-index: -1;
+  margin-top: -20px;
 }

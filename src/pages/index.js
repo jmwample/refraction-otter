@@ -3,19 +3,19 @@ import React from "react"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
+import BarChart from "../components/BarChart"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>This is my gatsby Netlify site.</p>
+    <SEO title="Otter" />
     <p>We are going to try to make a rective version of the CAIDA otter plots.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+    <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
+    <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
+      {/* <Image /> */}
+      <BarChart />
     </div>
-    <a href="refraction.network">Refraction Networking Parent Site</a>
-    <h2>Link Resources</h2>
+    <h2>Resource Links</h2>
     <ul>
       <li>
         <a href="https://www.caida.org/research/topology/as_core_network/2014/">AS CORE Network Graph</a>
@@ -25,6 +25,9 @@ const IndexPage = () => (
       </li>
       <li>
         <a href="https://stat.ripe.net/special/bgplay">RIPE NCC BGPLAY visualization.</a>
+      </li>
+      <li>
+        <a href="http://www.routeviews.org/routeviews/index.php/tools/">RouteViews BGP Data Collection</a>
       </li>
     </ul>
   </Layout>
