@@ -8,7 +8,7 @@ class BarChart extends Component {
     drawBarChart(data)  {
         const canvasHeight = 600
         const canvasWidth = 800
-        const scale = 20
+        // const scale = 20
         const svgCanvas = d3.select(this.refs.canvas)
             .append('svg')
             .attr('width', canvasWidth)
