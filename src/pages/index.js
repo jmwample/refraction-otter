@@ -1,20 +1,21 @@
 import React from "react"
-// import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
+// import Image from "../components/image"
 import BarChart from "../components/BarChart"
 import SEO from "../components/seo"
+import OtterChart from "../components/OtterChart"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Otter" />
-    <p>We are going to try to make a rective version of the CAIDA otter plots.</p>
+    <p>We are going to try to make a reactive version of the CAIDA otter plots.</p>
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
       {/* <Image /> */}
       <BarChart />
-    </div>
+      {/* <OtterChart /> */}
+   </div>
     <h2>Resource Links</h2>
     <ul>
       <li>
