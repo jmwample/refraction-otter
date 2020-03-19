@@ -2,6 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import BarChart from "../components/BarChart"
+import TestGraph from "../components/TestGraph"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
@@ -11,6 +12,7 @@ const IndexPage = () => (
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
       <BarChart />
+      <TestGraph />
    </div>
     <h2>Resource Links</h2>
     <ul>
@@ -26,6 +28,22 @@ const IndexPage = () => (
       <li>
         <a href="http://www.routeviews.org/routeviews/index.php/tools/">RouteViews BGP Data Collection</a>
       </li>
+
+      <li>
+        <a href="www.d3noob.org/2014/02/styles-in-d3js.html">D3 style tips</a>
+      </li>
+
+      <li>
+        <a href="https://chartio.com/resources/tutorials/how-to-show-data-on-mouseover-in-d3js/">Mouseover Text</a>
+      </li>
+      <li>
+        <a href="http://bl.ocks.org/alansmithy/e984477a741bc56db5a5">Enter(), Exit(), and Update() -- working with data</a>
+      </li>
+      <li>
+        <a href="https://www.d3-graph-gallery.com/graph/network_basic.html">D3 graph intro</a>
+      </li>
+      
+            
     </ul>
   </Layout>
 )

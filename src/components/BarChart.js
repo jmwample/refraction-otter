@@ -19,22 +19,29 @@ class BarChart extends Component {
         // second is ring (range 0 to 1), aka Radial Coordinate.
         // third is node size radius (center to edge)
         var data = {
-            "dots" : [
-                [reMap(25), 1, 40, 'label 1'],
-                [reMap(105), 0.8, 10, 'label 2'],
-                [reMap(266), 1, 8, 'label 3'],
-                [reMap(8), 0.2, 22, 'label 4'],
-                [reMap(189), 1, 28, 'label 5'],
-                [reMap(350), 0.6, 15, 'label 6'],
-                [reMap(119), 0.4, 24, 'label 7'],
-                [reMap(305), 0.8, 31, 'label 8']
+            "nodes" : [
+                { "angle":reMap(25),  "radius":1,   "noder":40, "label":'1', "group":1},
+                { "angle":reMap(105), "radius":0.8, "noder":10, "label":'2', "group":2},
+                { "angle":reMap(266), "radius":1,   "noder":8,  "label":'3', "group":3},
+                { "angle":reMap(8),   "radius":0.2, "noder":22, "label":'4', "group":4},
+                { "angle":reMap(189), "radius":1,   "noder":28, "label":'5', "group":5},
+                { "angle":reMap(350), "radius":0.6, "noder":15, "label":'6', "group":6},
+                { "angle":reMap(119), "radius":0.4, "noder":24, "label":'7', "group":7},
+                { "angle":reMap(305), "radius":0.8, "noder":31, "label":'8', "group":8}
+            ],
+            "links": [
+                {"source":2,"target":1,"weight":1},
+                {"source":3,"target":8,"weight":1},
+                {"source":2,"target":4,"weight":1},
+                {"source":2,"target":7,"weight":1},
+                {"source":5,"target":7,"weight":1}
             ],
             // [ lightgreen, lightblue, LightCoral, gainsboro, moccasin, pink]
             "countries": [
-                {"start": 0, "end":(Math.PI/2), "label":"Africa", "color": "lightgreen", "radius": 2.35},
-                {"start": (Math.PI/2), "end":(Math.PI), "label":"Asia", "color": "lightblue", "radius": 2.4},
-                {"start": (Math.PI), "end":(2*Math.PI), "label":"Europe", "color": "LightCoral", "radius": 2.3},
-                {"start": (3*Math.PI/2), "end":(2*Math.PI), "label":"North America", "color": "moccasin", "radius": 2.4}
+                {"start": (-1*Math.PI/8), "end":(Math.PI/2), "label":"AF", "color": "lightgreen", "radius": 2.35},
+                {"start": (Math.PI/2), "end":(Math.PI), "label":"AS", "color": "lightblue", "radius": 2.4},
+                {"start": (Math.PI), "end":(2*Math.PI), "label":"EU", "color": "LightCoral", "radius": 2.3},
+                {"start": (3*Math.PI/2), "end":(2*Math.PI), "label":"NA", "color": "moccasin", "radius": 2.4}
             ]
         };
 
@@ -77,19 +84,23 @@ class BarChart extends Component {
 
         var line = d3.lineRadial()
             .radius(function(d) {
-                return r(d[1]);
+                return r(d.radius);
             })
             .angle(function(d) {
-                return -d[0] + Math.PI / 2;
+                return -d.angle + Math.PI / 2;
             });
+        
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) { return d.id; }))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(canvasWidth / 2, canvasHeight / 2));
 
         const svgCanvas = d3.select(this.refs.canvas)
             .append('svg')
             .attr('width', canvasWidth)
             .attr('height', canvasHeight)
             .style('border', '1px solid black')
-            // .style('overflow', 'visible') // uncomment to see when your objects are sitting right out of frame. 
-
+            .style('overflow', 'visible') // uncomment to see when your objects are sitting right out of frame. 
 
         svgCanvas.append("circle")
             .attr("cx", canvasWidth/2)
@@ -98,45 +109,98 @@ class BarChart extends Component {
             .attr("stroke", "black")
             .attr("fill", "none")
 
-        var nodeGroup = svgCanvas.append("g")
-            .attr("transform", "translate("+canvasWidth/2+","+canvasHeight/2+")")
+
+        var graphGroup = svgCanvas.append("g")
             .attr("fill", "none")
             .attr("stroke-width", 4);      
 
-        nodeGroup.selectAll('point')
-            .data(data.dots)
+        var link = graphGroup.append('g')
+            .attr('className', 'forcelinks')
+            .selectAll("graphlinks")
+            .data(data.links)
             .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('transform', function(d) {
-                //console.log(d);
-                var coors = line([d]).slice(1).slice(0, -1); // removes 'M' and 'Z' from string
-                return 'translate(' + coors + ')'
-            })
+            .append("line")
+              .attr("class", "link");
+
+        var node = graphGroup.append("g")
+              .attr("class", "nodes")
+            .selectAll("graphnodes")
+            .data(data.nodes)
+            .enter()
+            .append("circle")
             .attr('r', function(d) {
-                return d[2];
+                return d.noder;
             })
             .attr('fill',function(d,i){
                 return color(i);
             }).on("click", function(d){
                 console.log(d);
                 //return tooltip.style("visibility", "visible");
-            });
-
-        nodeGroup.selectAll('point')
-            .enter().append("text")
-            .attr('transform', function(d) {
-                var coors = line([d]).slice(1).slice(0, -1); // removes 'M' and 'Z' from string
-                return 'translate(' + coors + ')'
             })
-            .text(function(d) { 
-                return d[3]; 
-            });
+            // .call(d3.drag()
+            //     .on("start", dragstarted)
+            //     .on("drag", dragged)
+            //     .on("end", dragended));
+      
+        node.append("text")
+            .text(function(d) {
+              return d.id;
+            })
+            .attr('x', 6)
+            .attr('y', 3);
 
+        simulation
+            .nodes(data.nodes)
+            .on("tick", tick);
+
+        // simulation.force("link").links(data.links);
+        
+        // graphGroup.selectAll('point')
+        //     .enter().append("text")
+        //     .attr('transform', function(d) {
+        //         var coors = line([d]).slice(1).slice(0, -1); // removes 'M' and 'Z' from string
+        //         return 'translate(' + coors + ')'
+        //     })
+        //     .text(function(d) { 
+        //         return d.label; 
+        //     });
+
+        function tick() {
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+            
+            node.attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+            }
+              
+
+        // var edgeGroup = svgCanvas.append("g")
+        //     .attr('className', 'asRelations')
+        //     .attr("transform", "translate("+canvasWidth/2+","+canvasHeight/2+")")
+        //     .selectAll('g')
+        //     .data(data.edges)
+        //     .enter().append('g')
+
+        // // Initialize the links
+        // const links = edgeGroup.append("line")
+        //     .attr("className", "links")
+        //     .attr("stroke","#999")
+        //     .attr("stroke-width","2px")
+        //     .style("opacity", 0.8)
+        //     .attr("id", function(d) { 
+        //         console.log(d.source, '->', d.target)
+        //         return "line"+d.source+d.target
+        //     })
+        //     .attr("className", "links")
+        //     .attr('marker-end','url(#arrowhead)')
+        //     //The marker-end attribute defines the arrowhead or 
+        //     //      polymarker that will be drawn at the final vertex of the given shape.
 
         // Plot the Arcs with country names. Create a container group then split by data.countries add the objects.
         var arcs = svgCanvas.append("g")
-            .attr('class', 'countryLabels')
+            .attr('className', 'countryLabels')
             .attr("transform", "translate("+canvasWidth/2+","+canvasHeight/2+")")
             .selectAll("g")
             .data(data.countries)
@@ -168,10 +232,15 @@ class BarChart extends Component {
             .text(function(d) {return d.label})
             .attr('transform', function(d) {
                 var th = (d.start + (d.end - d.start)/2);
-                var r = Math.min(canvasWidth, canvasHeight)/d.radius ;
-                return 'translate('+ r*Math.sin(th) +','+ -1*r*Math.cos(th) +')'
+                var r = Math.min(canvasWidth, canvasHeight)/d.radius + 50;
+                return 'translate('+ (r*Math.sin(th) - 10 ) +','+ -1*r*Math.cos(th) +')'
             })
-
+            .attr("text-anchor", function(d) {
+                // are we past the center?
+                return (d.endAngle + d.startAngle)/2 > Math.PI ?
+                    "end" : "start";
+            });
+        console.log(arcLabels, arcPaths)
     }
 
     // drawBarChart(data)  {
@@ -201,3 +270,12 @@ class BarChart extends Component {
     render() { return <div ref="canvas"></div> }
 }
 export default BarChart
+
+
+// function cartesian2Polar(x, y){
+//     distance = Math.sqrt(x*x + y*y)
+//     radians = Math.atan2(y,x) //This takes y first
+//     polarCoor = { r:distance, theta:radians }
+//     return polarCoor
+//     // degrees = radians * (180/Math.PI)
+// }
