@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {select} from 'd3'
-class TestGraph extends Component {
+class Bullseye extends Component {
     componentDidMount() {
         var data = {
             'rings':[
@@ -72,4 +72,4 @@ class TestGraph extends Component {
     }
     render() { return <div ref="canvas2"></div> }
 }
-export default TestGraph
+export default Bullseye

@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import BarChart from "../components/BarChart"
-import TestGraph from "../components/TestGraph"
+import Bullseye from "../components/Bullseye"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
@@ -12,7 +12,7 @@ const IndexPage = () => (
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
       <BarChart />
-      <TestGraph />
+      <Bullseye />
    </div>
     <h2>Resource Links</h2>
     <ul>
