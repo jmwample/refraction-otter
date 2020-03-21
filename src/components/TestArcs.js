@@ -22,7 +22,7 @@ class TestArcs extends Component {
         var latLong = true
 
         // Add an event listener to the button created in the html part
-        d3.select("#buttonLat").on("click", ()=> {console.log("eventLong"); latLong = true });
+        d3.select("#buttonLat").on("click", ()=> {console.log("eventLat"); latLong = true });
         d3.select("#buttonLong").on("click", () => {console.log("eventLong"); latLong = false });
 
         const canvasHeight = 600
