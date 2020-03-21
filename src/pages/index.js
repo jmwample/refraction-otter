@@ -2,7 +2,8 @@ import React from "react"
 
 import Layout from "../components/layout"
 // import BarChart from "../components/BarChart"
-import TestGraph from "../components/TestGraph"
+// import TestGraph from "../components/TestGraph"
+import TestArcs from "../components/TestArcs"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
@@ -11,9 +12,12 @@ const IndexPage = () => (
     <p>We are going to try to make a reactive version of the CAIDA otter plots.</p>
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
-      {/* <BarChart /> */}
-      <TestGraph />
-   </div>
+
+      <button type="button" id="buttonLat">Latitude</button>
+      <button type="button" id="buttonLong">Longitude</button>
+
+      <TestArcs />
+    </div>
     <h2>Resource Links</h2>
     <ul>
       <li>
