@@ -3,7 +3,8 @@ import React from "react"
 import Layout from "../components/layout"
 // import BarChart from "../components/BarChart"
 // import TestGraph from "../components/TestGraph"
-import TestArcs from "../components/TestArcs"
+// import TestArcs from "../components/TestArcs"
+import TicTacToe from "../components/TicTacToe"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
@@ -13,10 +14,10 @@ const IndexPage = () => (
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
 
-      <button type="button" id="buttonLat">Latitude</button>
-      <button type="button" id="buttonLong">Longitude</button>
+      {/* <button type="button" id="buttonLat">Latitude</button>
+      <button type="button" id="buttonLong">Longitude</button> */}
 
-      <TestArcs />
+      <TicTacToe />
     </div>
     <h2>Resource Links</h2>
     <ul>
