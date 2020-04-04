@@ -82,7 +82,7 @@ class BarChart extends Component {
         
         var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-        var line = d3.lineRadial()
+        d3.lineRadial()
             .radius(function(d) {
                 return r(d.radius);
             })

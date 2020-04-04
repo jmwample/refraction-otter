@@ -3,8 +3,6 @@ import * as d3 from 'd3'
 
 class TicTacToe extends Component {
 
-
-
     componentDidMount() {
         const canvasHeight = 600;
         const canvasWidth = 800;
@@ -17,17 +15,17 @@ class TicTacToe extends Component {
             {x1: 1.0/6.0, y1:-0.5, x2: 1.0/6.0, y2:0.5},   // |
         ]
 
-        var gameState = {
-            state:  [[0,0,0],[0,0,0],[0,0,0]],
-            player1: {
-                home: [],
-                color: 'black',
-            },
-            player2: {
-                home: [],
-                color: 'red',
-            }
-        };
+        // var gameState = {
+        //     state:  [[0,0,0],[0,0,0],[0,0,0]],
+        //     player1: {
+        //         home: [],
+        //         color: 'black',
+        //     },
+        //     player2: {
+        //         home: [],
+        //         color: 'red',
+        //     }
+        // };
 
         const svgCanvas = d3.select(this.refs.canvas)
             .append('svg')
@@ -36,7 +34,7 @@ class TicTacToe extends Component {
             .style('border', '1px solid black')
             .style('overflow', 'visible') // uncomment to see when your objects are sitting right out of frame. 
 
-        var board = svgCanvas.append('g')
+        svgCanvas.append('g')
             .attr('class', 'grid')
             .attr('stroke', 'black')
             .attr('transform', 'translate('+(canvasWidth/2)+','+(canvasHeight/2)+')')
