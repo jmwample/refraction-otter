@@ -14,7 +14,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Otter" />
+      <SEO title="TicTacToe" />
       <p>We are going to try to make a reactive version of the CAIDA otter plots.</p>
       <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
       <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>

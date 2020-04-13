@@ -3,9 +3,9 @@ import React from "react"
 
 import Layout from "../components/layout"
 import BarChart from "../components/BarChart"
+import ConeSizeHist from "../components/ConeSizeHist"
 // import TestGraph from "../components/TestGraph"
 // import TestArcs from "../components/TestArcs"
-// import TicTacToe from "../components/TicTacToe"
 import SEO from "../components/seo"
 
 const OtterPage = props => {
@@ -24,17 +24,15 @@ const OtterPage = props => {
   // console.log( location ) // **will change with every location update**
   return (
     <Layout>
-        <SEO title="Otter" />
+        <SEO title={"Otter-" + pageContent} />
         <h1>{pageContent}</h1>
         {/* <Title name={pageContent}> */}
         <p>We are going to try to make a reactive version of the CAIDA otter plots.</p>
         <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
         <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
 
-        {/* <button type="button" id="buttonLat">Latitude</button>
-        <button type="button" id="buttonLong">Longitude</button> */}
-
-        <BarChart />
+        {/* <BarChart /> */}
+        <ConeSizeHist histData={pageData}/>
         </div>
         <h2>Resource Links</h2>
         <ul>
