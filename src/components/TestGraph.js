@@ -44,7 +44,7 @@ class TestGraph extends Component {
                 })
 
         // Let's list the force we wanna apply on the network
-        var simulation = d3.forceSimulation(data.nodes)                 // Force algorithm is applied to data.nodes
+        d3.forceSimulation(data.nodes)                 // Force algorithm is applied to data.nodes
             .force("link", d3.forceLink()                               // This force provides links between nodes
                 .id(function(d) { return d.id; })                     // This provide  the id of a node
                 .links(data.links)                                    // and this the list of links

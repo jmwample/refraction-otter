@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 // import BarChart from "../components/BarChart"
-import TestGraph from "../components/TestGraph"
+// import TestGraph from "../components/TestGraph"
 import TestGraph2 from "../components/TestGraph2"
 
 import SEO from "../components/seo"
@@ -14,7 +14,6 @@ const IndexPage = () => (
     <p>See the parent site for more information about <a href="refraction.network">Refraction Networking</a>.</p>
     <div style={{ maxWidth: `100px`, marginBottom: `0.45rem` }}>
 
-      <TestGraph />
       <TestGraph2 />
    </div>
     <h2>Resource Links</h2>

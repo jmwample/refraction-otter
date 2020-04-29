@@ -39,9 +39,9 @@ class TestGraph2 extends Component {
 
             d3.select(this).attr("cx", d.x).attr("cy", d.y);
             links.each(function(l, li) {
-            if (l.source.index === i) {
+            if (l.source === d.id) {
                 d3.select(this).attr("x1", d.x).attr("y1", d.y);
-            } else if (l.target.index === i) {
+            } else if (l.target === d.id) {
                 d3.select(this).attr("x2", d.x).attr("y2", d.y);
             }
             });
@@ -50,34 +50,34 @@ class TestGraph2 extends Component {
         var net = svg.append("g")
             .attr("transform", "translate("+width/2+","+height/2+")")
 
-        var links = net.selectAll("link")
+        var links = net.selectAll("color-link")
             .data(data1.links)
             .enter()
             .append("line")
-            .attr("class", "link")
+            .attr("class", "color-link")
             .attr("x1", function(l) {
-                // console.log(l);
                 var sourceNode = data1.nodes.filter(function(d, i) {
-                    return i === l.source.index
+                    return l.source === d.id
                 })[0];
                 d3.select(this).attr("y1", sourceNode.y);
                 return sourceNode.x
             })
             .attr("x2", function(l) {
                 var targetNode = data1.nodes.filter(function(d, i) {
-                    return i === l.target.index
+                    return l.target === d.id
                 })[0];
+
                 d3.select(this).attr("y2", targetNode.y);
                 return targetNode.x
             })
             .attr("fill", "none")
             .attr("stroke", "black");
 
-        net.selectAll("node")
+        net.selectAll("color-node")
             .data(data1.nodes)
             .enter()
             .append("circle")
-            .attr("class", "node")
+            .attr("class", "color-node")
             .attr("cx", function(d) {
                 return d.x
             })
@@ -109,32 +109,3 @@ function polar2Cartesian(r, t){
     var cart = {x:x, y:y}
     return cart
 }
-
-// var links = svg.selectAll("link")
-// .data(data.links)
-// .enter()
-// .append("line")
-// .attr("class", "link")
-// .attr("x1", function(l){
-//     var sourceNode = data.nodes.filter(function(d, i) {
-//         return i === l.source
-//     })[0];
-
-//     console.log(sourceNode);
-//     var cartesian = polar2Cartesian(sourceNode.r, sourceNode.t);
-
-//     d3.select(this).attr("y1", cartesian.y);
-//     return cartesian.x
-// })
-// .attr("x2", function(l) {
-//     var targetNode = data.nodes.filter(function(d, i) {
-//         return i === l.target
-//     })[0];
-
-//     var cartesian = polar2Cartesian(targetNode.r, targetNode.t);
-
-//     d3.select(this).attr("y2", cartesian.y);
-//     return cartesian.x
-// })
-// .attr("fill", "none")
-// .attr("stroke", "white");
